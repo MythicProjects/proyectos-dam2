@@ -1,0 +1,25 @@
+.header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1e1e2f;
+    color: white;
+}
+
+.logo {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+}
+
+.header nav a:hover {
+    color: #8b5cf6;
+}

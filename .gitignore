@@ -1,0 +1,34 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Builds y dependencias
+build/
+out/
+target/
+bin/
+obj/
+*.class
+.gradle/
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node / Vite
+dist/
+*.log
+.vite/
+
+# IDE
+.vs/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/caches/
+
+# Local y secretos
+local.properties
+.env

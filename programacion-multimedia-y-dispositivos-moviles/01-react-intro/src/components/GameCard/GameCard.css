@@ -1,0 +1,144 @@
+.gameCard{
+    height: 500px;
+    width: 1200px;
+    box-sizing: border-box;
+
+    background: linear-gradient(135deg, #ededff, #bc9edc);
+    border: 5px solid transparent;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    background-clip: padding-box;
+
+    padding: 2rem;
+    margin: 25px auto;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 3rem;
+
+    transition:all 0.3s ease-in-out;
+}
+
+.gameCard:hover{
+    border: 5px solid #9e53cc;
+    box-shadow: 0 0px 10px #9e53cc;
+}
+
+/* IMAGE */
+.gameImage{
+    height: 100%;
+    width: 300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.gameImage img{
+    height: 100%;
+    width: auto;
+}
+
+/* INFO */
+
+.gameInfo{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    justify-content: center;
+    text-align: left;
+
+    margin: 0;  
+}
+
+/* LIKE */
+
+.gameLike{
+    height: 100px;
+    width:  100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.gameLike button{
+    height: 100px;
+    width:  100px;
+
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 0.25s ease-in;
+}
+
+.gameLike> button:hover
+{
+    transform: scale(1.1);
+}
+
+.gameLike img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.gameLike img.liked {
+    animation: heartPop 0.3s ease-in-out;
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.gameLike img.disliked{
+    animation: heartPopOut 0.3s ease-in-out;
+}
+
+@keyframes heartPopOut {
+    0% {
+        transform: scale(1.35);
+    }
+
+    50% {
+        transform: scale(0.75);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+h2{
+    color: #34233e;
+    font-size: 2rem;
+}
+h3, p{
+    color: #5b5b5b;
+}

@@ -4,13 +4,13 @@
 
 ## Acceso a datos
 
-- [UD 1: Ej01_gestorPeliculas](acceso-a-datos/01-gestor-peliculas/) — Java
+- [UD 1: Gestor de películas](acceso-a-datos/01-gestor-peliculas/) — Java
 
 ## Interactivo
 
 ### _mix
 
-- [UD 1: ex_firstWeek](interactivo/_mix/01-ejercicios-primera-semana/) — Java
+- [UD 1: Ejercicios de práctica](interactivo/_mix/01-ejercicios-primera-semana/) — Java
 
 ## Programación multimedia y dispositivos móviles
 

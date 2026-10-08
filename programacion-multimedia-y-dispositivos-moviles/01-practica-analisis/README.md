@@ -211,7 +211,7 @@ Cada `GameCard` tiene un estado `liked` creado con `useState`. Al pulsar el cora
 
 ### 5.2. Diferencias detectadas
 
-[COMPLETAR]
+[COMPLETAR] - probar
 
 ### 5.3. Adaptaciones entre Android e iOS
 

@@ -33,7 +33,6 @@ Aplicación móvil desarrollada con React Native y Expo que muestra un listado d
   - [5.2. Diferencias detectadas](#52-diferencias-detectadas)
   - [5.3. Adaptaciones entre Android e iOS](#53-adaptaciones-entre-android-e-ios)
 - [Estructura del repositorio](#estructura-del-repositorio)
-- [Autoría](#autoría)
 
 ---
 
@@ -48,7 +47,7 @@ La aplicación consta de una única pantalla con tres zonas: una cabecera con el
 - [Node.js](https://nodejs.org/) y [pnpm](https://pnpm.io/), instalados con `pacman` (CachyOS):
 
 ```bash
-  sudo pacman -S nodejs pnpm
+    sudo pacman -S nodejs pnpm
 ```
 
 - Emulador de Android del SDK de Android, sin Android Studio ([guía de Expo](https://docs.expo.dev/workflow/android-studio-emulator/))
@@ -56,7 +55,7 @@ La aplicación consta de una única pantalla con tres zonas: una cabecera con el
 ### 1.2. Instalación
 
 ```bash
-pnpm install
+    pnpm install
 ```
 
 ### 1.3. Ejecución con Expo
@@ -64,17 +63,16 @@ pnpm install
 1. Arrancar el emulador:
 
 ```bash
-   emulator -avd <nombre-del-emulador>
+    emulator -avd <nombre-del-emulador>
 ```
 
 2. Iniciar el servidor de desarrollo:
 
 ```bash
-   pnpm expo start
+    pnpm expo start
 ```
 
 3. Pulsar `a` para abrir la app en el emulador de Android (es posible usar `i` para iOS y `w` para web).
-   En la terminal aparecerá un código QR y un menú de opciones:
 
 ### 1.4. Dispositivo o emulador utilizado
 
@@ -88,7 +86,7 @@ pnpm install
 ### 1.5. Capturas de la aplicación
 
 <p align="center">
-  <img src="./screenshots/app-inicio.png" alt="Pantalla de inicio" height="250">
+  <img src="./screenshots/app-inicio.png" alt="Pantalla de inicio" width="400">
 </p>
 
 ## 2. Análisis de la tecnología
@@ -169,6 +167,7 @@ HomeScreen (src/app/index.tsx)
 │   ├── GameCard
 │   ├── GameCard
 │   └── GameCard
+│   └── ...
 └── Footer
 ```
 
@@ -176,13 +175,13 @@ HomeScreen (src/app/index.tsx)
 
 ### 4.1. Componente reutilizable
 
-`GameCard` recibe toda su información mediante props tipadas (`title`, `platform`, `year`, `image`). En `GameList` se define un array con los datos de cada juego y se recorre con `map()`. En cada iteración se separa el `id` (que se usa como `key`) del resto de propiedades, que se pasan a la tarjeta con el operador spread (`{...game}`). Así, el mismo componente se reutiliza cinco veces con información distinta.
+`GameCard` recibe toda su información mediante props tipadas (`title`, `platform`, `year`, `image`). En `GameList` se define un array con los datos de cada juego y se recorre con `map()`. En cada iteración se separa el `id` (que se usa como `key`) del resto de propiedades, que se pasan a la tarjeta con el operador spread (`{...game}`). Así, el mismo componente se reutiliza las veces necesarias con información distinta.
 
 ### 4.2. Nuevo contenido
 
 Se han añadido 3 juegos más, hasta llegar al número 8
 
-<img src="./screenshots/nuevo-juego.png" alt="Tarjeta del nuevo juego" width="250">
+<img src="./screenshots/nuevo-juego.png" alt="Tarjeta del nuevo juego" width="400">
 
 ### 4.3. Apariencia
 
@@ -195,23 +194,23 @@ Posteriormente, para demostrar la simplicidad de la modificación de la aparienc
 
 |                                        Antes                                         |                                        Después                                         |
 | :----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
-| <img src="./screenshots/apariencia-antes.png" alt="Apariencia original" width="250"> | <img src="./screenshots/apariencia-nueva.png" alt="Apariencia modificada" width="250"> |
+| <img src="./screenshots/apariencia-antes.png" alt="Apariencia original" width="400"> | <img src="./screenshots/apariencia-nueva.png" alt="Apariencia modificada" width="400"> |
 
 ### 4.4. Interacción
 
 Cada `GameCard` tiene un estado `liked` creado con `useState`. Al pulsar el corazón se ejecuta la función `togleLike`, que invierte el estado y cambia la imagen entre el corazón vacío y el lleno. Además, se usa la API `Animated` con un valor guardado en `useRef` para hacer una animación de escala: el corazón crece y vuelve a su tamaño al marcarlo, y se encoge y recupera al desmarcarlo.
 
-<img src="./screenshots/like.png" alt="Interacción del botón de favorito" width="250">
+<img src="./screenshots/like.png" alt="Interacción del botón de favorito" width="400">
 
 ## 5. Comprobación multiplataforma
 
 ### 5.1. Dónde se ha ejecutado la aplicación
 
-[COMPLETAR]
+La aplicación se ha ejecutado en Android Emulator de Google para Linux
 
 ### 5.2. Diferencias detectadas
 
-[COMPLETAR] - probar
+Debido a que no se dispone de emulador para iOS las diferencias se han notado a la hora de utilizar estilos y en pensar la zona de uso de la aplicación, comentado en el siguiente punto.
 
 ### 5.3. Adaptaciones entre Android e iOS
 

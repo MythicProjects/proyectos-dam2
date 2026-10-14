@@ -12,7 +12,7 @@ public class Layout extends JFrame {
     public Layout() {
         setLayout(new GridLayout(1, 4));
 
-        String resoure = "/img/foto.jpg";
+        String resoure = "./img/foto.jpg";
 
         try{
             BufferedImage img = ImageIO.read(getClass().getResource(resoure));

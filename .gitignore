@@ -32,3 +32,10 @@ dist/
 # Local y secretos
 local.properties
 .env
+
+# pnpm / Expo
+.pnpm-store/
+.expo/
+
+# Archivos comprimidos (entregas)
+*.zip

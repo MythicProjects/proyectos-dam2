@@ -39,3 +39,9 @@ local.properties
 
 # Archivos comprimidos (entregas)
 *.zip
+
+# LibreOffice
+*.od[tspgfbcm]
+*.ot[tspg]
+*.fod[tspg]
+.~lock.*#

@@ -7,20 +7,17 @@ public enum PaletteType {
     PURPLE_FIRE("Violeta", 0x8000FF),
     CYAN_FIRE("Cian", 0x00DCC8),
     RAINBOW_FIRE("Arcoíris", 0xFF00D0);
-
-    private final String label;       // texto que se muestra en el botón
-    private final int previewColor;   // color de fondo del botón
+    // ------------------------------------------------------------------
+    // PaletteType settings
+    // ------------------------------------------------------------------
+    private final String label;
+    private final int previewColor;
 
     PaletteType(String label, int previewColor) {
         this.label = label;
         this.previewColor = previewColor;
     }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public int getPreviewColor() {
-        return previewColor;
-    }
+    // ---------------------- Getters
+    public String getLabel() { return label;}
+    public int getPreviewColor() { return previewColor; }
 }

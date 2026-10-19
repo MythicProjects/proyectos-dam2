@@ -10,16 +10,22 @@ import javax.swing.SwingUtilities;
 import presenter.IPresenter;
 
 public class View implements IView, Runnable {
+    // Presenter
     private IPresenter presenter;
 
-    private final JFrame frame;
+    // Panels
+    // -- Viewer
     private final Viewer viewer;
     private static final Dimension VIEWER_SIZE = new Dimension(960, 540);
 
-
-    private final ControlPanel controlPanel;
+    // -- Data Panel
     private final DataPanel dataPanel;
+    // -- Control Panel
+    private final ControlPanel controlPanel;
 
+    private final JFrame frame;
+
+    // Thread
     private Thread thread;
     private volatile boolean running = false;
 
@@ -38,21 +44,32 @@ public class View implements IView, Runnable {
         frame.add(lefJPanel, BorderLayout.WEST);
         frame.add(viewer, BorderLayout.CENTER);
     }
+    // ------------------------------------------------------------------
+    // Presenter
+    // ------------------------------------------------------------------
+    @Override 
+    public void setPresenter(IPresenter presenter){
+        this.presenter = presenter;
+        controlPanel.setPresenter(presenter);
+        dataPanel.setPresenter(presenter);
+    }
 
+    // ------------------------------------------------------------------
+    // Initialize
+    // ------------------------------------------------------------------
     @Override 
     public void startView(){
         viewer.setPreferredSize(VIEWER_SIZE);
         frame.pack();
         frame.setVisible(true);
 
-        
         running = true;
-        if (thread != null) return; // ya arrancada
+        if (thread != null) return;
         thread = new Thread(this);
         thread.setDaemon(true);
         thread.start();
     }
-
+    // ---------------------- Thread
     @Override
     public void run() {      
         while (running) {
@@ -65,22 +82,15 @@ public class View implements IView, Runnable {
             }
         }
     }
-
-    @Override 
-    public void setPresenter(IPresenter presenter){
-        this.presenter = presenter;
-        controlPanel.setPresenter(presenter);
-        dataPanel.setPresenter(presenter);
-    }
-
+    // ------------------------------------------------------------------
+    // Info
+    // ------------------------------------------------------------------
     @Override
     public void showValues(int width, int height, int sparks, int coolPoints, int randomization) {
         dataPanel.showValues(width, height, sparks, coolPoints, randomization);
     }
-
     @Override
     public void showMessage(String message) {
         SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(frame, message));
     }
-
 }

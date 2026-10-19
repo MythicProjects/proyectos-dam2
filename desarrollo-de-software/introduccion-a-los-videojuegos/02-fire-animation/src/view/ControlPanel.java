@@ -20,39 +20,34 @@ import common.PaletteType;
 import presenter.IPresenter;
 
 public class ControlPanel extends JPanel{
-    // Colores de la rejilla: 2 filas de 8
+    private IPresenter presenter;
+    // ------------------------------------------------------------------
+    // Color Swatch
+    // ------------------------------------------------------------------
+    private JLabel selected; // selected swatch
+    private static final int COLUMNS = 8;
+    private static final int SWATCH_SIZE = 48;
+    private static final int PRESET_HEIGHT = 48;
+    private static final Border NORMAL_BORDER = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
+    private static final Border SELECTED_BORDER = BorderFactory.createLineBorder(Color.WHITE, 3);
 
     private static final int[] SWATCH_COLORS = {
         0xFFFF0000, 0xFFFF4000, 0xFFFF8000, 0xFFFFC000, 0xFFFFFF00, 0xFF80FF00, 0xFF00FF00, 0xFF00FF80,
         0xFF00FFFF, 0xFF0080FF, 0xFF0040FF, 0xFF4000FF, 0xFF8000FF, 0xFFBF00FF, 0xFFFF00FF, 0xFFFF0080
     };
 
-    private static final int COLUMNS = 8;
-    private static final int SWATCH_SIZE = 22;
-    private static final int PRESET_HEIGHT = 26;
-
-    private static final Border NORMAL_BORDER = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
-    private static final Border SELECTED_BORDER = BorderFactory.createLineBorder(Color.WHITE, 2);
-
-    private IPresenter presenter;
-    private JLabel selected; // casilla marcada ahora mismo: puede ser un preset o un color de la rejilla
-
     public ControlPanel(){
         setLayout(new BorderLayout(0,8)); // Configura como se colocara
         add(createActionButtons(), BorderLayout.NORTH);
         add(createPaletteSelector(), BorderLayout.CENTER);
     }
-
-    public void setPresenter(IPresenter presenter){
-        this.presenter = presenter;
-    }
-
+    public void setPresenter(IPresenter presenter){ this.presenter = presenter; }
     // ------------------------------------------------------------------
-    // Play / Pause / Stop
+    // Buton creation
     // ------------------------------------------------------------------
     private JPanel createActionButtons(){
         JPanel panel = new JPanel(new FlowLayout());
-
+        
         JButton playButton = new JButton("Play");
         JButton pauseButton = new JButton("Pause");
         JButton stopButton = new JButton("Stop");
@@ -67,21 +62,19 @@ public class ControlPanel extends JPanel{
 
         return panel;
     }
-
     // ------------------------------------------------------------------
-    // Paletas predefinidas (arriba) + rejilla de colores (abajo)
+    // Palette creation
     // ------------------------------------------------------------------
-
     private JPanel createPaletteSelector() {
         JPanel selector = new JPanel(new BorderLayout(0, 6));
         selector.add(createPresetRow(), BorderLayout.NORTH);
         selector.add(createColorGrid(), BorderLayout.CENTER);
         return selector;
     }
-
+    // ---------------------- Preset creation
     private JPanel createPresetRow() {
         PaletteType[] types = PaletteType.values();
-        JPanel row = new JPanel(new GridLayout(1, types.length, 3, 3)); // una fila, una columna por paleta
+        JPanel row = new JPanel(new GridLayout(1, types.length, 3, 3));
 
         for (PaletteType type : types) {
             JLabel preset = createTile(type.getPreviewColor());
@@ -100,19 +93,20 @@ public class ControlPanel extends JPanel{
             row.add(preset);
 
             if (type == PaletteType.FIRE) {
-                markSelected(preset); // la paleta con la que arranca el modelo
+                markSelected(preset);
             }
         }
         return row;
     }
-
+    // ---------------------- Color grid creation
     private JPanel createColorGrid() {
-        JPanel grid = new JPanel(new GridLayout(0, COLUMNS, 3, 3)); // filas automáticas
+        JPanel grid = new JPanel(new GridLayout(0, COLUMNS, 3, 3));
 
         for (int color : SWATCH_COLORS) {
             JLabel swatch = createTile(color);
             swatch.setPreferredSize(new Dimension(SWATCH_SIZE, SWATCH_SIZE));
 
+            // Mouse Listener
             swatch.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -124,22 +118,21 @@ public class ControlPanel extends JPanel{
         }
         return grid;
     }
-
-    // Casilla de color: base común para presets y rejilla
+    // ----- Create tile
     private JLabel createTile(int color) {
         JLabel tile = new JLabel();
-        tile.setOpaque(true);                 // sin esto, el fondo no se pinta
+        tile.setOpaque(true); // needed to fill the bg
         tile.setBackground(new Color(color));
         tile.setBorder(NORMAL_BORDER);
         tile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return tile;
     }
-
+    // ----- Create tile
     private void markSelected(JLabel tile) {
         if (selected != null) {
-            selected.setBorder(NORMAL_BORDER); // desmarca la anterior
+            selected.setBorder(NORMAL_BORDER); // unselect the last
         }
         selected = tile;
-        tile.setBorder(SELECTED_BORDER);       // marca la nueva
+        tile.setBorder(SELECTED_BORDER); // selects the new one
     }
 }

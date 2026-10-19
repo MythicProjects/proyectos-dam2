@@ -5,8 +5,8 @@ import java.awt.image.DataBufferInt;
 public class Render {
     private final FireGenerator fire;
     private volatile Palette palette;
-    private volatile BufferedImage front; // la que se enseña en pantalla
-    private BufferedImage back; // en la que se pinta el fotograma nuevo
+    private volatile BufferedImage front;
+    private BufferedImage back;
 
     public Render(FireGenerator fire, Palette palette){
         this.fire = fire;
@@ -16,27 +16,22 @@ public class Render {
 
     public void setPalette(Palette palette){ this.palette = palette; }
 
+    private void createImage(){
+        front = new BufferedImage(fire.getWidth(), fire.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        back = new BufferedImage(fire.getWidth(), fire.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    }
+
     public BufferedImage renderFrame(){
-        // Si ha cambiado la resolución, se crean imágenes nuevas
-        if(back.getWidth() != fire.getWidth() || back.getHeight() != fire.getHeight()){
-                createImage();
-        }
+        if(back.getWidth() != fire.getWidth() || back.getHeight() != fire.getHeight()){ createImage(); }
 
         // 1. Pintar el fotograma nuevo en la imagen trasera
         int[][] temperatures = fire.getTemperatures();
         Palette p = palette;
         int width = fire.getWidth();
 
-        // ------------------- version anterior - facil
-        /*
-        for (int y = 0; y < fire.getHeight(); y++) {
-            for(int x = 0; x < fire.getWidth(); x++){
-                back.setRGB(x, y, palette.getColor(temperatures[y][x]));
-            }
-        } */
-        // ------------------- version mas rapida
+        // ------------------- mejora
+        // ------------------- anterior -> iteracion por resolucion y back.setRGB(x, y, palette.getColor(temperatures[y][x]));
         synchronized (back){
-            // accede al array de pixeles -> mas rapido que setRGB
             int[] pixels = ((DataBufferInt) back.getRaster().getDataBuffer()).getData();
             for (int y = 0; y < fire.getHeight(); y++){
                 int[] row = temperatures[y];
@@ -46,7 +41,7 @@ public class Render {
                 }
             }
         }
-
+        
         // 2. Intercambiar: la trasera pasa a ser la delantera
         BufferedImage temp = front;
         front = back;
@@ -54,13 +49,5 @@ public class Render {
 
         return front;
     }
-
-    public BufferedImage getFrontImage(){
-        return front;
-    }
-
-    private void createImage(){
-        front = new BufferedImage(fire.getWidth(), fire.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        back = new BufferedImage(fire.getWidth(), fire.getHeight(), BufferedImage.TYPE_INT_ARGB);
-    }
+    public BufferedImage getFrontImage(){ return front; }
 }

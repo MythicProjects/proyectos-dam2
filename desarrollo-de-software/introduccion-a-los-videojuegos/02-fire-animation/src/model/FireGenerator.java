@@ -15,25 +15,26 @@ public class FireGenerator {
 
     private final SplittableRandom random = new SplittableRandom(); // en vez de Random
 
-    public FireGenerator(int width, int height){
-        setResolution(width, height);
-    }
+    public FireGenerator(int width, int height){ setResolution(width, height); }
 
     public void setResolution(int width, int height){
         this.width = width;
         this.height = height;
         this.temperatures = new int[height][width];
     }
-
+    // ------------------------------------------------------------------
+    // Setting points
+    // ------------------------------------------------------------------
+    // ------------------- Spark Points
     public void setSparkPoints(){
-        int base = height - 1; // recordar que height es el total
+        int base = height - 1;
         for (int x = 0; x < width; x++){
-            if(random.nextDouble() * 100 < sparksPercentage){ // de 0 a 1 x 100 -> compara con el porcentaje
-                temperatures[base][x] = Palette.MAX_TEMPERATURE; // Temperatura maxima asignada en la paleta
+            if(random.nextDouble() * 100 < sparksPercentage){ 
+                temperatures[base][x] = Palette.MAX_TEMPERATURE; 
             }
         }
     }
-
+    // ------------------- Cool Points
     public void setCoolPoints(){
         int base = height - 1; // recordar que height es el total
         for (int x = 0; x < width; x++){
@@ -42,15 +43,10 @@ public class FireGenerator {
             }
         }
     }
-    public boolean isCold(){
-        for (int[] row : temperatures){
-            for (int t : row){
-                if ( t > 0) return false;
-            }
-        }
-
-        return true;
-    }
+    // ------------------------------------------------------------------
+    // Calculate temperatures
+    //      - Old sistem: get 4 temperatures, divide by 4 and return it to the iteration
+    // ------------------------------------------------------------------
     public  void updateTemperatures(){
         double variation = randomization / 100.0;
         int lastX = width - 1;
@@ -73,45 +69,40 @@ public class FireGenerator {
             }
         }
     }
-    // --------------------------- old updateTemperatures - facil
-    /* 
-    public void updateTemperatures(){
-        double maxNoise = Math.max(0, randomization - 10);
-        
-        for (int y = height - 2; y >= 0; y--){
-            for(int x = 0; x < width; x++){
-                double left = temperatures[y + 1][Math.max(x - 1, 0)]; // limitar izquierda
-                double center = temperatures[y + 1][x];
-                double right = temperatures[y + 1][Math.min(x + 1, width - 1)]; // limitar derecha
-                double self = temperatures[y][x];
-
-                //int t = (self + left + center + right) / 4 - random.nextInt(randomization + 1); // resta de 0 a random para dar variedad
-                double t = (self + left + center + right) / 3.9 - BASE_COOLING - random.nextDouble(maxNoise + 1);
-                t = Math.min(Palette.MAX_TEMPERATURE, t);
-
-                temperatures[y][x] = (int) Math.max(t, 0);
+    // ------------------------------------------------------------------
+    // Temperatures
+    // ------------------------------------------------------------------
+    // ------------------- check if is cold
+    public boolean isCold(){
+        for (int[] row : temperatures){
+            for (int t : row){
+                if ( t > 0) return false;
             }
         }
+        return true;
     }
-    // fila actual> self
-    // fila anterior > y + 1 (for va de mayor a menor height)
-    // posiciones: left: x -1, center: x + 0, right: x + 1
-    // cuatro valores> hacer media y randomizar con alguna formula
-    // */
-
-    public int[][] getTemperatures(){ return temperatures; }
+    // ------------------- clear temperatures
     public void clearTemperatures() { temperatures = new int[height][width]; }
-    
+    public void clearBaseRow() { Arrays.fill(temperatures[height - 1], 0); }
+    // ------------------- get temperatures
+    public int[][] getTemperatures(){ return temperatures; }
+    // ------------------------------------------------------------------
+    // Get Resolution
+    // ------------------------------------------------------------------
     public int getWidth() { return width; }
     public int getHeight() { return height; }
+    // ------------------------------------------------------------------
+    // Get Fire settings
+    // ------------------------------------------------------------------
+    public double getSparksPercentage() { return sparksPercentage; }
     public double getCoolPointsPercentage() { return coolPointPercentage; }
     public int getRandomization() { return randomization; }
-
+    public double getCooling() { return cooling; }
+    // ------------------------------------------------------------------
+    // Fire settings
+    // ------------------------------------------------------------------
     public void setSparksPercentage(double p){ this.sparksPercentage = p; }
     public void setCoolPointsPercentage(double p){ this.coolPointPercentage = p; }
     public void setRandomization(int r){ this.randomization = r; }
-    public void setCooling(double c){ this.cooling = c;  System.out.println("cooling recibido: " + cooling);}
-
-    public void clearBaseRow() { Arrays.fill(temperatures[height - 1], 0); }
-
+    public void setCooling(double c){ this.cooling = c; }
 }

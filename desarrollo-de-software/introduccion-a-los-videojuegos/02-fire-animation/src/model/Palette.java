@@ -6,24 +6,12 @@ import java.util.List;
 import common.PaletteType;
 
 public class Palette {
-
-    public static Palette createWithType(PaletteType type) {
-        return switch (type) {
-            case FIRE        -> createRedFirePalette();
-            case BLUE_FIRE   -> createBlueFirePalette();
-            case GREEN_FIRE  -> createGreenFirePalette();
-            case PURPLE_FIRE -> createPurpleFirePalette();
-            case CYAN_FIRE   -> createCyanFirePalette();
-            case RAINBOW_FIRE -> createRainbowFirePalette();
-        };
-    }
-
+    private final int[] colors = new int[MAX_TEMPERATURE + 1];
+    
     public static final int MAX_TEMPERATURE = 255;
-
+    
     private static final int BLACK = 0xFF000000;
     private static final int WHITE = 0xFFFFFFFF;
-
-    private final int[] colors = new int[MAX_TEMPERATURE + 1]; // 0 - 255 --> 256 positions
 
     public Palette(List<ColorTargetDTO> targets){
         if (targets.size() < 2
@@ -42,11 +30,9 @@ public class Palette {
             
             int range = to.temperature() - from.temperature();
 
-            // si agrega temperaturas de 1 en 1, se puede hacer mas retro reduciendo pasos?
             for(int t = from.temperature(); t <= to.temperature(); t++){
                 double ratio = (double) (t - from.temperature()) / range;
                 colors[t] = interpolate(from.color(), to.color(), ratio);
-                //colors[t] = to.color());
             }
         }
     }
@@ -55,20 +41,13 @@ public class Palette {
         return colors[temperature];
     }
 
-    public static Palette createWithColor(int baseColor) {
-        int base = baseColor | 0xFF000000; // fuerza el alfa a FF (opaco)
-
-        List<ColorTargetDTO> targets = new ArrayList<>();
-        targets.add(new ColorTargetDTO(0,   BLACK));                         // negro
-        targets.add(new ColorTargetDTO(20,  interpolate(BLACK, base, 0.6))); // color oscuro
-        targets.add(new ColorTargetDTO(80,  base));                          // color puro
-        targets.add(new ColorTargetDTO(150, interpolate(base, WHITE, 0.7))); // color casi blanco
-        targets.add(new ColorTargetDTO(255, WHITE));                         // blanco
-        return new Palette(targets);
-    }
-
-
+    // ------------------------------------------------------------------
+    // Interpolation tools
+    // ------------------------------------------------------------------
     private static int interpolate(int c1, int c2, double ratio){
+        // int -> 32 bits
+        // Usa máscara AND de 8 bits -> 0xFF
+        // >> / << -> desplaza X bits para guardar o colocar el valor
         int a = mix((c1 >> 24) & 0xFF, (c2 >> 24) & 0xFF, ratio);
         int r = mix((c1 >> 16) & 0xFF, (c2 >> 16) & 0xFF, ratio);
         int g = mix((c1 >> 8) & 0xFF, (c2 >> 8) & 0xFF, ratio);
@@ -76,23 +55,42 @@ public class Palette {
 
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
-    // & 0xFF crea una mascara AND de 8 bits
-    // 0x prefijo JAVA -> "lo que sigue es hexadecimal"
-    // int siempre 32 bits, FF son 8 bits
-    // (c1 >> 24) -> c1 (int) tiene 32 bits coloca el alpha en este caso justo donde la mascara (8 bits iniciales)
 
     private static int mix(int v1, int v2, double ratio){
+        // Formula interpolacion lineal
         return (int) Math.round(v1 + (v2 - v1) * ratio); 
     }
-    // Formula de interpolacion lineal // v1 + (v2 - v1) * ratio
-    // ratio va de 0 (v1) a 1 (v2)
-    // (v2 - v1) -> es la diferencia y se aplica segun ratio hasta ser v2 (ratio = 1)
-
 
     // ------------------------------------------------------------------
-    // PALETA PERSONALIZADA
+    // Create Palettes
     // ------------------------------------------------------------------
+    public static Palette createWithType(PaletteType type) {
+        return switch (type) {
+            case FIRE        -> createRedFirePalette();
+            case BLUE_FIRE   -> createBlueFirePalette();
+            case GREEN_FIRE  -> createGreenFirePalette();
+            case PURPLE_FIRE -> createPurpleFirePalette();
+            case CYAN_FIRE   -> createCyanFirePalette();
+            case RAINBOW_FIRE -> createRainbowFirePalette();
+        };
+    }
 
+    public static Palette createWithColor(int baseColor) {
+        // Aplica el color sobre escala de grises
+        int base = baseColor | 0xFF000000; // fuerza el alfa a FF (opaco)
+
+        List<ColorTargetDTO> targets = new ArrayList<>();
+        targets.add(new ColorTargetDTO(0,   BLACK));
+        targets.add(new ColorTargetDTO(20,  interpolate(BLACK, base, 0.6)));
+        targets.add(new ColorTargetDTO(80,  base));
+        targets.add(new ColorTargetDTO(150, interpolate(base, WHITE, 0.7)));
+        targets.add(new ColorTargetDTO(255, WHITE));
+        return new Palette(targets);
+    }
+
+    // ------------------------------------------------------------------
+    // Custom Palette
+    // ------------------------------------------------------------------
     public static Palette createRedFirePalette() {
         List<ColorTargetDTO> targets = new ArrayList<>();
         targets.add(new ColorTargetDTO(0,   0xFF120000)); // negro rojizo

@@ -7,15 +7,15 @@ public class Resource {
         this.product = initialProduct;
     }
 
-    public void  consumeProduct(){
+    synchronized  void  consumeProduct(){
         product--;
     }
 
-    public void generateNewProduct(){
+    synchronized  void generateNewProduct(){
         product++;
     }
 
-    public int getProduct(){
+    synchronized int getProduct(){
         return product;
     }
 }

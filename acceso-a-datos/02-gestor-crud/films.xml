@@ -1,273 +1,285 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <films>
-    <film id="1">
-        <title>Interstellar</title>
-        <director>Christopher Nolan</director>
-        <year>2014</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="2">
-        <title>El Padrino</title>
-        <director>Francis Ford Coppola</director>
-        <year>1972</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="3">
-        <title>Matrix</title>
-        <director>Lana Wachowski</director>
-        <year>1999</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="4">
-        <title>Parásitos</title>
-        <director>Bong Joon-ho</director>
-        <year>2019</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="5">
-        <title>Toy Story</title>
-        <director>John Lasseter</director>
-        <year>1995</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="6">
-        <title>Pulp Fiction</title>
-        <director>Quentin Tarantino</director>
-        <year>1994</year>
-        <gender>Crimen</gender>
-    </film>
-    <film id="7">
-        <title>El señor de los anillos: El retorno del rey</title>
-        <director>Peter Jackson</director>
-        <year>2003</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="8">
-        <title>Origen</title>
-        <director>Christopher Nolan</director>
-        <year>2010</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="9">
-        <title>La lista de Schindler</title>
-        <director>Steven Spielberg</director>
-        <year>1993</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="10">
-        <title>El club de la lucha</title>
-        <director>David Fincher</director>
-        <year>1999</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="11">
-        <title>El viaje de Chihiro</title>
-        <director>Hayao Miyazaki</director>
-        <year>2001</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="12">
-        <title>Gladiator</title>
-        <director>Ridley Scott</director>
-        <year>2000</year>
-        <gender>Acción</gender>
-    </film>
-    <film id="13">
-        <title>Spirited Away</title>
-        <director>Hayao Miyazaki</director>
-        <year>2001</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="14">
-        <title>Cadena perpetua</title>
-        <director>Frank Darabont</director>
-        <year>1994</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="15">
-        <title>El resplandor</title>
-        <director>Stanley Kubrick</director>
-        <year>1980</year>
-        <gender>Terror</gender>
-    </film>
-    <film id="16">
-        <title>La vida es bella</title>
-        <director>Roberto Benigni</director>
-        <year>1997</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="17">
-        <title>Blade Runner 2049</title>
-        <director>Denis Villeneuve</director>
-        <year>2017</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="18">
-        <title>El silencio de los corderos</title>
-        <director>Jonathan Demme</director>
-        <year>1991</year>
-        <gender>Crimen</gender>
-    </film>
-    <film id="19">
-        <title>Coco</title>
-        <director>Lee Unkrich</director>
-        <year>2017</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="20">
-        <title>El caballero oscuro</title>
-        <director>Christopher Nolan</director>
-        <year>2008</year>
-        <gender>Acción</gender>
-    </film>
-    <film id="21">
-        <title>Pinocho de Guillermo del Toro</title>
-        <director>Guillermo del Toro</director>
-        <year>2022</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="22">
-        <title>Whiplash</title>
-        <director>Damien Chazelle</director>
-        <year>2014</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="23">
-        <title>WALL-E</title>
-        <director>Andrew Stanton</director>
-        <year>2008</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="24">
-        <title>Salvar al soldado Ryan</title>
-        <director>Steven Spielberg</director>
-        <year>1998</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="25">
-        <title>Psicosis</title>
-        <director>Alfred Hitchcock</director>
-        <year>1960</year>
-        <gender>Terror</gender>
-    </film>
-    <film id="26">
-        <title>Uno de los nuestros</title>
-        <director>Martin Scorsese</director>
-        <year>1990</year>
-        <gender>Crimen</gender>
-    </film>
-    <film id="27">
-        <title>Alien, el octavo pasajero</title>
-        <director>Ridley Scott</director>
-        <year>1979</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="28">
-        <title>El truco final (El prestigio)</title>
-        <director>Christopher Nolan</director>
-        <year>2006</year>
-        <gender>Misterio</gender>
-    </film>
-    <film id="29">
-        <title>Delrevés (Inside Out)</title>
-        <director>Pete Docter</director>
-        <year>2015</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="30">
-        <title>La la land</title>
-        <director>Damien Chazelle</director>
-        <year>2016</year>
-        <gender>Romance</gender>
-    </film>
-    <film id="31">
-        <title>Infiltrados</title>
-        <director>Martin Scorsese</director>
-        <year>2006</year>
-        <gender>Crimen</gender>
-    </film>
-    <film id="32">
-        <title>Terminator 2: El juicio final</title>
-        <director>James Cameron</director>
-        <year>1991</year>
-        <gender>Acción</gender>
-    </film>
-    <film id="33">
-        <title>El gran hotel Budapest</title>
-        <director>Wes Anderson</director>
-        <year>2014</year>
-        <gender>Comedia</gender>
-    </film>
-    <film id="34">
-        <title>Amélie</title>
-        <director>Jean-Pierre Jeunet</director>
-        <year>2001</year>
-        <gender>Comedia</gender>
-    </film>
-    <film id="35">
-        <title>Dune</title>
-        <director>Denis Villeneuve</director>
-        <year>2021</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="36">
-        <title>Regreso al futuro</title>
-        <director>Robert Zemeckis</director>
-        <year>1985</year>
-        <gender>Ciencia ficción</gender>
-    </film>
-    <film id="37">
-        <title>Tiburón</title>
-        <director>Steven Spielberg</director>
-        <year>1975</year>
-        <gender>Terror</gender>
-    </film>
-    <film id="38">
-        <title>El laberinto del fauno</title>
-        <director>Guillermo del Toro</director>
-        <year>2006</year>
-        <gender>Fantasía</gender>
-    </film>
-    <film id="39">
-        <title>Up</title>
-        <director>Pete Docter</director>
-        <year>2009</year>
-        <gender>Animación</gender>
-    </film>
-    <film id="40">
-        <title>Mad Max: Furia en la carretera</title>
-        <director>George Miller</director>
-        <year>2015</year>
-        <gender>Acción</gender>
-    </film>
-    <film id="41">
-        <title>Seven</title>
-        <director>David Fincher</director>
-        <year>1995</year>
-        <gender>Crimen</gender>
-    </film>
-    <film id="42">
-        <title>Forrest Gump</title>
-        <director>Robert Zemeckis</director>
-        <year>1994</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="43">
-        <title>Oppenheimer</title>
-        <director>Christopher Nolan</director>
-        <year>2023</year>
-        <gender>Drama</gender>
-    </film>
-    <film id="44">
-        <title>Jurassic Park</title>
-        <director>Steven Spielberg</director>
-        <year>1993</year>
-        <gender>Aventura</gender>
-    </film>
-    <film id="45">
-        <title>El rey león</title>
-        <director>Roger Allers</director>
-        <year>1994</year>
-        <gender>Animación</gender>
-    </film>
+  <film id="1">
+    <title>Interstellar</title>
+    <director>Christopher Nolan</director>
+    <year>2014</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="2">
+    <title>El Padrino</title>
+    <director>Francis Ford Coppola</director>
+    <year>1972</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="3">
+    <title>Matrix</title>
+    <director>Lana Wachowski</director>
+    <year>1999</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="4">
+    <title>Parásitos</title>
+    <director>Bong Joon-ho</director>
+    <year>2019</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="5">
+    <title>Toy Story</title>
+    <director>John Lasseter</director>
+    <year>1995</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="6">
+    <title>Pulp Fiction</title>
+    <director>Quentin Tarantino</director>
+    <year>1994</year>
+    <genre>Crimen</genre>
+  </film>
+  <film id="7">
+    <title>El señor de los anillos: El retorno del rey</title>
+    <director>Peter Jackson</director>
+    <year>2003</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="8">
+    <title>Origen</title>
+    <director>Christopher Nolan</director>
+    <year>2010</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="9">
+    <title>La lista de Schindler</title>
+    <director>Steven Spielberg</director>
+    <year>1993</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="10">
+    <title>El club de la lucha</title>
+    <director>David Fincher</director>
+    <year>1999</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="11">
+    <title>El viaje de Chihiro</title>
+    <director>Hayao Miyazaki</director>
+    <year>2001</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="12">
+    <title>Gladiator</title>
+    <director>Ridley Scott</director>
+    <year>2000</year>
+    <genre>Acción</genre>
+  </film>
+  <film id="13">
+    <title>Spirited Away</title>
+    <director>Hayao Miyazaki</director>
+    <year>2001</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="14">
+    <title>Cadena perpetua</title>
+    <director>Frank Darabont</director>
+    <year>1994</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="15">
+    <title>El resplandor</title>
+    <director>Stanley Kubrick</director>
+    <year>1980</year>
+    <genre>Terror</genre>
+  </film>
+  <film id="16">
+    <title>La vida es bella</title>
+    <director>Roberto Benigni</director>
+    <year>1997</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="17">
+    <title>Blade Runner 2049</title>
+    <director>Denis Villeneuve</director>
+    <year>2017</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="18">
+    <title>El silencio de los corderos</title>
+    <director>Jonathan Demme</director>
+    <year>1991</year>
+    <genre>Crimen</genre>
+  </film>
+  <film id="19">
+    <title>Coco</title>
+    <director>Lee Unkrich</director>
+    <year>2017</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="20">
+    <title>El caballero oscuro</title>
+    <director>Christopher Nolan</director>
+    <year>2008</year>
+    <genre>Acción</genre>
+  </film>
+  <film id="21">
+    <title>Pinocho de Guillermo del Toro</title>
+    <director>Guillermo del Toro</director>
+    <year>2022</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="22">
+    <title>Whiplash</title>
+    <director>Damien Chazelle</director>
+    <year>2014</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="23">
+    <title>WALL-E</title>
+    <director>Andrew Stanton</director>
+    <year>2008</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="24">
+    <title>Salvar al soldado Ryan</title>
+    <director>Steven Spielberg</director>
+    <year>1998</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="25">
+    <title>Psicosis</title>
+    <director>Alfred Hitchcock</director>
+    <year>1960</year>
+    <genre>Terror</genre>
+  </film>
+  <film id="26">
+    <title>Uno de los nuestros</title>
+    <director>Martin Scorsese</director>
+    <year>1990</year>
+    <genre>Crimen</genre>
+  </film>
+  <film id="27">
+    <title>Alien, el octavo pasajero</title>
+    <director>Ridley Scott</director>
+    <year>1979</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="28">
+    <title>El truco final (El prestigio)</title>
+    <director>Christopher Nolan</director>
+    <year>2006</year>
+    <genre>Misterio</genre>
+  </film>
+  <film id="29">
+    <title>Delrevés (Inside Out)</title>
+    <director>Pete Docter</director>
+    <year>2015</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="30">
+    <title>La la land</title>
+    <director>Damien Chazelle</director>
+    <year>2016</year>
+    <genre>Romance</genre>
+  </film>
+  <film id="31">
+    <title>Infiltrados</title>
+    <director>Martin Scorsese</director>
+    <year>2006</year>
+    <genre>Crimen</genre>
+  </film>
+  <film id="32">
+    <title>Terminator 2: El juicio final</title>
+    <director>James Cameron</director>
+    <year>1991</year>
+    <genre>Acción</genre>
+  </film>
+  <film id="33">
+    <title>El gran hotel Budapest</title>
+    <director>Wes Anderson</director>
+    <year>2014</year>
+    <genre>Comedia</genre>
+  </film>
+  <film id="34">
+    <title>Amélie</title>
+    <director>Jean-Pierre Jeunet</director>
+    <year>2001</year>
+    <genre>Comedia</genre>
+  </film>
+  <film id="35">
+    <title>Dune</title>
+    <director>Denis Villeneuve</director>
+    <year>2021</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="36">
+    <title>Regreso al futuro</title>
+    <director>Robert Zemeckis</director>
+    <year>1985</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="37">
+    <title>Tiburón</title>
+    <director>Steven Spielberg</director>
+    <year>1975</year>
+    <genre>Terror</genre>
+  </film>
+  <film id="38">
+    <title>El laberinto del fauno</title>
+    <director>Guillermo del Toro</director>
+    <year>2006</year>
+    <genre>Fantasía</genre>
+  </film>
+  <film id="39">
+    <title>Up</title>
+    <director>Pete Docter</director>
+    <year>2009</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="40">
+    <title>Mad Max: Furia en la carretera</title>
+    <director>George Miller</director>
+    <year>2015</year>
+    <genre>Acción</genre>
+  </film>
+  <film id="41">
+    <title>Seven</title>
+    <director>David Fincher</director>
+    <year>1995</year>
+    <genre>Crimen</genre>
+  </film>
+  <film id="42">
+    <title>Forrest Gump</title>
+    <director>Robert Zemeckis</director>
+    <year>1994</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="43">
+    <title>Oppenheimer</title>
+    <director>Christopher Nolan</director>
+    <year>2023</year>
+    <genre>Drama</genre>
+  </film>
+  <film id="44">
+    <title>Jurassic Park</title>
+    <director>Steven Spielberg</director>
+    <year>1993</year>
+    <genre>Aventura</genre>
+  </film>
+  <film id="45">
+    <title>El rey león</title>
+    <director>Roger Allers</director>
+    <year>1994</year>
+    <genre>Animación</genre>
+  </film>
+  <film id="46">
+    <title>Dune: Parte uno</title>
+    <director>Denis Villeneuve</director>
+    <year>2021</year>
+    <genre>Ciencia ficción</genre>
+  </film>
+  <film id="47">
+    <title>Perfect Days</title>
+    <director>Wim Wenders</director>
+    <year>2023</year>
+    <genre>Drama poético</genre>
+  </film>
 </films>

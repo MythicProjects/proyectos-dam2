@@ -1,17 +1,20 @@
 package model;
 
-public class Model {
+public class Model implements IModel{
 
-    public void execute(){
+    @Override
+    public void execute() {
+
         Resource resource = new Resource(0);
-        Producer producer = new Producer(resource, 10000);
-        Consumer consumer = new Consumer(resource, 10000);
+        Thread producer = new Thread(new Producer(resource, 10_000), "Producer");
+        Thread consumer = new Thread(new Consumer(resource, 10_000), "Consumer");
 
-        Thread h1 = new Thread(producer, "Producer");
-        Thread h2 = new Thread(consumer, "Consumer");
+        producer.start();
+        consumer.start();
 
-        h1.start();
-        h2.start();
+        //producer.join();
+        //consumer.join();
+
 
         System.out.println(resource.getProduct());
     }   

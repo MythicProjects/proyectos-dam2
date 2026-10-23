@@ -1,176 +1,281 @@
-import java.io.*;
-import java.util.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
+import java.time.Year;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
-    private static final String FILE_XML = "./films.xml";
+    private static final String FILE_XML = "films.xml";
+    private static final int MIN_YEAR = 1888; // first film ever recorded
+    private static final int MAX_YEAR = Year.now().getValue() + 5;
 
-    public static void main(String[] args){
-        List<Film> filmsList = importXML(FILE_XML);
-        Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
+    private static final FilmRepository repository = new FilmRepository(FILE_XML);
+
+    public static void main(String[] args) {
+        repository.load();
 
         int option;
-        do{
-            System.out.println("========= CATALOGO =========");
-            System.out.println("1 - Show all films");
-            System.out.println("2 - Search film by ID");
-            System.out.println("3 - Add new film");
-            System.out.println("4 - Edit film by ID");
-            System.out.println("5 - Delete film by ID");
-            System.out.println("Option: ");
-            option = readInt(sc);
-
+        do {
+            showMenu();
+            option = readInt("Selecciona una opción: ", 0, 5, "Opción no válida. Introduce un número del 0 al 5.");
             switch (option) {
-                case 1 -> showFullInfo(filmsList); //showAllFilms(filmsList);
-                case 2 -> searchByID(filmsList, sc);
-                case 3 -> searchByTitle(filmsList, sc);
-                case 4 -> exportarXML(filmsList, FILE_XML);
-                case 5 -> {
-                    List<Film> imported = importXML(FILE_XML);
-                    showFullInfo(imported);
-                    }
-                case 0 -> System.out.println("Bye!");
-                default -> System.out.println("Not valid option");
-        }
-        }
-        while(option != 0);
+                case 1 -> showAllFilms();
+                case 2 -> searchById();
+                case 3 -> addFilm();
+                case 4 -> updateFilm();
+                case 5 -> deleteFilm();
+                case 0 -> System.out.println("¡Hasta luego!");
+            }
+        } while (option != 0);
+
         sc.close();
     }
-    // ----------------------------------- Ex 01 Part 3
-    private static int readInt(Scanner sc){
-        try{
-            return  Integer.parseInt(sc.nextLine().trim());
-        } catch (NumberFormatException e){
-            return -1; // user
-        }
+
+    // ----------------------------------------------------------------------
+    // Console menu
+    // ----------------------------------------------------------------------
+    private static void showMenu() {
+        System.out.println();
+        System.out.println("========== CATÁLOGO DE PELÍCULAS ==========");
+        System.out.println("1. Mostrar todas las películas");
+        System.out.println("2. Buscar una película por ID");
+        System.out.println("3. Añadir una película");
+        System.out.println("4. Modificar una película por ID");
+        System.out.println("5. Eliminar una película por ID");
+        System.out.println("0. Salir");
+        System.out.println("==========================================");
     }
 
-    private static void searchByID(List<Film>films, Scanner sc){
-        String id = sc.nextLine().trim().toLowerCase();
-
-        boolean finded = false;
-        for(Film f : films){
-            if(f.getId() == Integer.parseInt(id)){
-                System.out.println("|| ---- " + f.getId() + " - " + f.getTitle());
-
-                finded = true;
-            }
-        }
-
-        if(!finded) System.out.println("There is any film of that gender");
-    }
-
-    private static void searchByTitle(List<Film>films, Scanner sc){
-        String text = sc.nextLine().trim().toLowerCase();
-
-        boolean finded = false;
-        for(Film f : films){
-            if(f.getTitle().toLowerCase().trim().contains(text)){
-                System.out.println("|| ---- " 
-                    + f.getId() + " - " 
-                    + f.getTitle() +  " - " 
-                    + f.getDirector() + " - "
-                    + f.getYear() + " - "
-                    + f.getGender());
-
-                finded = true;
-            }
-        }
-
-        if(!finded) System.out.println("Film not finded");
-    }
-
-    // ----------------------------------- Ex 01 Part 4
-    private  static void exportarXML(List<Film> films, String fileName) {
+    // ----------------------------------------------------------------------
+    // Menu options
+    // ----------------------------------------------------------------------
+    // ------------------------ Show all films
+    private static void showAllFilms() {
+        List<Film> films = repository.findAll();
         if (films.isEmpty()) {
-            System.err.println("Nothing to export, file not overwritten");
+            System.out.println("El catálogo está vacío.");
+            return;
+        }
+        for (Film film : films) {
+            System.out.println(film);
+        }
+        System.out.println("Total: " + films.size() + " películas.");
+    }
+
+    // ------------------------ Search by id
+    private static void searchById() {
+        int id = 0;
+        System.out.print("ID de la película: ");
+        // Repeat until the user types a positive whole number
+        while (id < 1) {
+            // Input ended: exit instead of crashing
+            if (!sc.hasNext()) {
+                System.out.println();
+                System.out.println("No hay más entrada. Saliendo.");
+                System.exit(0);
+            }
+            if (sc.hasNextInt()) {
+                id = sc.nextInt();
+            }
+            // Clear the rest of the line (also the line break left by nextInt)
+            sc.nextLine();
+            if (id < 1) {
+                System.out.print("ID no válido. Introduce un número entero positivo: ");
+            }
+        }
+        Film film = repository.findById(id);
+        if (film == null) {
+            System.out.println("No existe ninguna película con ID " + id + ".");
+        } else {
+            System.out.println(film);
+        }
+    }
+
+    // ------------------------ Add film
+    private static void addFilm() {
+        if (!canWrite()) {
             return;
         }
 
-        Element root = new Element("films");
+        String title = readRequired("Título: ");
+        String director = readRequired("Director: ");
+        int year = readYear("Año (" + MIN_YEAR + "-" + MAX_YEAR + "): ", -1);
+        String genre = readRequired("Género: ");
 
-        for (Film f : films){
-            Element film =  new Element("film");
-
-            film.setAttribute("id", String.valueOf(f.getId()));
-            film.addContent(new Element("title").setText(f.getTitle()));
-            film.addContent(new Element("director").setText(f.getDirector()));
-            film.addContent(new Element("year").setText(String.valueOf(f.getYear())));
-            film.addContent(new Element("gender").setText(f.getGender()));  
-            root.addContent(film);
-        }
-
-
-        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-        try (Writer w = Files.newBufferedWriter(Path.of(fileName), StandardCharsets.UTF_8)){
-            outputter.output(new Document(root), w);
-            System.out.println("Exported at " + fileName);
-        }catch(IOException e){
-            System.err.println("Cannot write " + fileName + ": " + e.getMessage());
+        Film film = new Film(repository.nextId(), title, director, year, genre);
+        if (repository.add(film)) {
+            System.out.println("Película añadida y guardada en " + FILE_XML + ":");
+            System.out.println(film);
         }
     }
 
-    // ----------------------------------- Ex 02 Part 1
-    private static List<Film> importXML(String fileName) {
-        List<Film> films = new ArrayList<Film>();
+    // ------------------------ Modify film
+    private static void updateFilm() {
+        if (!canWrite()) {
+            return;
+        }
 
-        SAXBuilder builder = new SAXBuilder();
-        // Reject any DOCTYPE to prevent XXE (external entity) attacks
-        builder.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        int id = readId();
+        Film film = repository.findById(id);
+        if (film == null) {
+            System.out.println("No existe ninguna película con ID " + id + ". No se ha modificado el fichero.");
+            return;
+        }
 
-        try {
-            Document doc = builder.build(new File(fileName));
-            Element root = doc.getRootElement();
+        System.out.println("Datos actuales:");
+        System.out.println(film);
+        System.out.println("Introduce los nuevos datos (Enter para mantener el valor actual):");
 
-            for(Element e : root.getChildren("film")){
-                try{
-                    int id = Integer.parseInt(e.getAttributeValue("id"));
-                    String title = e.getChildTextTrim("title");
-                    String director = e.getChildTextTrim("director");
-                    int year = Integer.parseInt(e.getChildTextTrim("year"));
-                    String gender = e.getChildTextTrim("gender");
+        String title = readOptional("Título [" + film.getTitle() + "]: ", film.getTitle());
+        String director = readOptional("Director [" + film.getDirector() + "]: ", film.getDirector());
+        int year = readYear("Año [" + film.getYear() + "]: ", film.getYear());
+        String genre = readOptional("Género [" + film.getGenre() + "]: ", film.getGenre());
 
+        boolean changed = !title.equals(film.getTitle())
+                || !director.equals(film.getDirector())
+                || year != film.getYear()
+                || !genre.equals(film.getGenre());
+        if (!changed) {
+            System.out.println("No hay cambios. No se ha modificado el fichero.");
+            return;
+        }
 
-                    films.add(new Film(id, title, director, year, gender));
-                }catch(NumberFormatException ex){
-                    System.err.println("Skipping invalid film: " + ex.getMessage());
+        film.setTitle(title);
+        film.setDirector(director);
+        film.setYear(year);
+        film.setGenre(genre);
+        if (repository.update(film)) {
+            System.out.println("Película modificada y guardada en " + FILE_XML + ":");
+            System.out.println(film);
+        }
+    }
+
+    // ------------------------ Delete film
+    private static void deleteFilm() {
+        if (!canWrite()) {
+            return;
+        }
+
+        int id = readId();
+        Film film = repository.findById(id);
+        if (film == null) {
+            System.out.println("No existe ninguna película con ID " + id + ". No se ha modificado el fichero.");
+            return;
+        }
+
+        System.out.println(film);
+        if (!readYesNo("¿Seguro que quieres eliminarla? (s/n): ")) {
+            System.out.println("Eliminación cancelada. No se ha modificado el fichero.");
+            return;
+        }
+
+        if (repository.delete(id)) {
+            System.out.println("Película con ID " + id + " eliminada (borrado físico: se ha quitado de "
+                    + FILE_XML + ").");
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // Tools
+    // ----------------------------------------------------------------------
+    // ------------------------ Write check
+    // Write operations are not allowed if the XML file could not be loaded
+    private static boolean canWrite() {
+        if (repository.isWriteBlocked()) {
+            System.out.println("Operación no disponible: " + FILE_XML + " está vacío o mal formado."
+                    + " Revisa el fichero y vuelve a iniciar el programa.");
+            return false;
+        }
+        return true;
+    }
+
+    // ------------------------ Read line
+    private static String readLine(String prompt) {
+        System.out.print(prompt);
+        // Input ended (e.g. piped input without a final 0): exit instead of crashing
+        if (!sc.hasNextLine()) {
+            System.out.println();
+            System.out.println("No hay más entrada. Saliendo.");
+            System.exit(0);
+        }
+        return sc.nextLine().trim();
+    }
+
+    // ------------------------ Read number
+    private static int readInt(String prompt, int min, int max, String error) {
+        while (true) {
+            String line = readLine(prompt);
+            try {
+                int value = Integer.parseInt(line);
+                if (value >= min && value <= max) {
+                    return value;
                 }
+            } catch (NumberFormatException e) {
+                // Not a number: the error message below is shown
             }
-            System.out.println("Imported " + films.size() + " films from " + fileName);
-        } catch (JDOMException e) {
-            System.err.println("Invalid XML in " + fileName + ": " + e.getMessage());
-        } catch (IOException e) {
-            System.err.println("Cannot read " + fileName + ": " + e.getMessage());
+            System.out.println(error);
         }
-
-        return films;
     }
 
-
-    private static void showAllFilms(List<Film> film){
-        for(Film f : film) System.out.println("|| ---- " + f.getTitle());
+    // ------------------------ Read id
+    private static int readId() {
+        return readInt("ID de la película: ", 1, Integer.MAX_VALUE, "ID no válido. Introduce un número entero positivo.");
     }
-    // show in main
-    private static void showFullInfo(List<Film> films) {
-        if (films.isEmpty()) {
-            System.out.println("No films to show");
-            return;
+
+    // ------------------------ Required text
+    private static String readRequired(String prompt) {
+        while (true) {
+            String line = readLine(prompt);
+            if (!line.isEmpty()) {
+                return line;
+            }
+            System.out.println("Este campo no puede estar vacío.");
         }
-        for (Film f : films) {
-            System.out.println("|| ---- " + f.getId() + " - " + f.getTitle() + " - "
-                + f.getDirector() + " - " + f.getYear() + " - " + f.getGender());
+    }
+
+    // ------------------------ Optional text
+    private static String readOptional(String prompt, String current) {
+        String line = readLine(prompt);
+        if (line.isEmpty()) {
+            return current;
+        }
+        return line;
+    }
+
+    // ------------------------ Read year
+    private static int readYear(String prompt, int current) {
+        while (true) {
+            String line = readLine(prompt);
+            if (line.isEmpty()) {
+                if (current != -1) {
+                    return current;
+                }
+                System.out.println("El año no puede estar vacío.");
+                continue;
+            }
+            try {
+                int year = Integer.parseInt(line);
+                if (year >= MIN_YEAR && year <= MAX_YEAR) {
+                    return year;
+                }
+            } catch (NumberFormatException e) {
+                // Not a number: the error message below is shown
+            }
+            System.out.println("Año no válido. Introduce un número entre " + MIN_YEAR + " y " + MAX_YEAR + ".");
+        }
+    }
+
+    // ------------------------ Yes or no
+    private static boolean readYesNo(String prompt) {
+        while (true) {
+            String answer = readLine(prompt).toLowerCase();
+            if (answer.equals("s") || answer.equals("si") || answer.equals("sí")) {
+                return true;
+            }
+            if (answer.equals("n") || answer.equals("no")) {
+                return false;
+            }
+            System.out.println("Responde 's' o 'n'.");
         }
     }
 }
-    // ----------------------------------- Ex 02 Part 4

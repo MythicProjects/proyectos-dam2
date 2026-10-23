@@ -33,7 +33,7 @@ public class Render {
         // ------------------- anterior -> iteracion por resolucion y back.setRGB(x, y, palette.getColor(temperatures[y][x]));
         synchronized (back){
             int[] pixels = ((DataBufferInt) back.getRaster().getDataBuffer()).getData();
-            for (int y = 0; y < fire.getHeight(); y++){
+            for (int y = 0; y < fire.getHeight() - 1; y++){
                 int[] row = temperatures[y];
                 int offset = y * width;
                 for (int x = 0; x < width; x ++){

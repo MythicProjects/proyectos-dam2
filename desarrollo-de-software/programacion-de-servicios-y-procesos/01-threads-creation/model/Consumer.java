@@ -15,8 +15,8 @@ public class Consumer implements Runnable {
 
         for(int i = 0; i < consumed; i++){
             resource.consumeProduct();
-           // System.out.println(threadName + " ha consumido ||| Total: " + resource.getProduct());
-            //System.out.print("| C: -1 = " + resource.getProduct() + " |");
+            // System.out.println(threadName + " ha consumido ||| Total: " + resource.getProduct());
+            // System.out.print("| C: -1 = " + resource.getProduct() + " |");
         }
 
 //        System.out.println(threadName + " ha terminado" + resource.getProduct());

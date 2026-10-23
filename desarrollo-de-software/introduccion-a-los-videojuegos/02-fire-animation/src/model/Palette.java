@@ -77,7 +77,7 @@ public class Palette {
 
     public static Palette createWithColor(int baseColor) {
         // Aplica el color sobre escala de grises
-        int base = baseColor | 0xFF000000; // fuerza el alfa a FF (opaco)
+        int base = baseColor | 0x00000000; // fuerza el alfa a FF (opaco)
 
         List<ColorTargetDTO> targets = new ArrayList<>();
         targets.add(new ColorTargetDTO(0,   BLACK));
@@ -153,16 +153,17 @@ public class Palette {
 
     public static Palette createRainbowFirePalette() {
         List<ColorTargetDTO> targets = new ArrayList<>();
-        targets.add(new ColorTargetDTO(0,   0xFF100020)); // negro violeta
-        targets.add(new ColorTargetDTO(20,  0xFF7000FF)); // violeta eléctrico
-        targets.add(new ColorTargetDTO(55,  0xFFFF00D0)); // magenta intenso
-        targets.add(new ColorTargetDTO(90,  0xFFFF0030)); // rojo brillante
-        targets.add(new ColorTargetDTO(125, 0xFFFF6500)); // naranja fuego
-        targets.add(new ColorTargetDTO(160, 0xFFFFFF00)); // amarillo puro
-        targets.add(new ColorTargetDTO(195, 0xFF40FF00)); // verde neón
-        targets.add(new ColorTargetDTO(225, 0xFF00EFFF)); // cian eléctrico
-        targets.add(new ColorTargetDTO(245, 0xFFB0F8FF)); // azul casi blanco
-        targets.add(new ColorTargetDTO(255, 0xFFFFFFFF)); // blanco incandescente
+        targets.add(new ColorTargetDTO(  0, 0xFF0B0000)); // negro violeta
+        targets.add(new ColorTargetDTO(  25, 0xFF0B001A)); // negro violeta
+        targets.add(new ColorTargetDTO(  50, 0xFF3B0066)); // violeta oscuro
+        targets.add(new ColorTargetDTO( 75, 0xFFB200B2)); // magenta
+        targets.add(new ColorTargetDTO( 100, 0xFFFF0000)); // rojo
+        targets.add(new ColorTargetDTO( 125, 0xFFFF8800)); // naranja
+        targets.add(new ColorTargetDTO( 150, 0xFFF0E000)); // amarillo
+        targets.add(new ColorTargetDTO( 175, 0xFF00F000)); // verde
+        targets.add(new ColorTargetDTO(200, 0xFF00EAF2)); // cian
+        targets.add(new ColorTargetDTO(220, 0xFF0D55FF)); // azul
+        targets.add(new ColorTargetDTO(255, 0xFFDBF3FF)); // blanco azulado
         return new Palette(targets);
     }
 }

@@ -137,9 +137,7 @@ public class Model implements IModel, Runnable{
     // Resolution settings
     // ------------------------------------------------------------------
     @Override 
-    public synchronized void setResolution(int w, int h){
-        fire.setResolution(w, h);
-    }
+    public synchronized void setResolution(int w, int h){ fire.setResolution(w, h); }
     // ------------------------------------------------------------------
     // Fire settings
     // ------------------------------------------------------------------

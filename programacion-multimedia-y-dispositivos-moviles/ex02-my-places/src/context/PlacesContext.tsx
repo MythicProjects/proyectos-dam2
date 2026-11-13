@@ -1,11 +1,11 @@
 import { Place } from "@/data/places";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
+	createContext,
+	ReactNode,
+	useContext,
+	useEffect,
+	useState,
 } from "react";
 
 const STORAGE_KEY = "places";

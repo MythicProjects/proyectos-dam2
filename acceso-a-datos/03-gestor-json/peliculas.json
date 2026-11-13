@@ -275,5 +275,17 @@
     "director" : "Denis Villeneuve",
     "año" : 2021,
     "genero" : "Ciencia ficción"
+  }, {
+    "id" : 48,
+    "titulo" : "Nuevo Texto",
+    "director" : "Test",
+    "año" : 1999,
+    "genero" : "test"
+  }, {
+    "id" : 50,
+    "titulo" : "Test",
+    "director" : "test",
+    "año" : 1900,
+    "genero" : "test"
   } ]
 }

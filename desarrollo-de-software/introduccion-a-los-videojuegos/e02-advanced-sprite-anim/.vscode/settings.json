@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": ["src/main/java", "src/main/resources"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/flatlaf-3.7.2.jar",
+        "lib/flatlaf-intellij-themes-3.7.2.jar"
+    ]
+}

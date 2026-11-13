@@ -1,0 +1,17 @@
+{
+	"name": "ex02-my-places",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+	"runArgs": ["--userns=keep-id", "-p", "127.0.0.1:8081:8081"],
+	"remoteUser": "node",
+	"updateRemoteUserUID": false,
+	"postCreateCommand": "npm install -g pnpm@11",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"expo.vscode-expo-tools",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode"
+			]
+		}
+	}
+}

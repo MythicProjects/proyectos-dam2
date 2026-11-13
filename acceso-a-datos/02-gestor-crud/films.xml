@@ -276,10 +276,16 @@
     <year>2021</year>
     <genre>Ciencia ficción</genre>
   </film>
-  <film id="47">
-    <title>Perfect Days</title>
-    <director>Wim Wenders</director>
-    <year>2023</year>
-    <genre>Drama poético</genre>
+  <film id="48">
+    <title>Nuevo Texto</title>
+    <director>Test</director>
+    <year>1999</year>
+    <genre>test</genre>
+  </film>
+  <film id="49">
+    <title>t</title>
+    <director>t</director>
+    <year>1999</year>
+    <genre>t</genre>
   </film>
 </films>
